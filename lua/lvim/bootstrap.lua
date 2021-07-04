@@ -18,7 +18,7 @@ function _G.get_runtime_dir()
   local lvim_runtime_dir = os.getenv "LUNARVIM_RUNTIME_DIR"
   if not lvim_runtime_dir then
     -- when nvim is used directly
-    return vim.fn.stdpath "config"
+    return vim.fn.stdpath "data"
   end
   return lvim_runtime_dir
 end
@@ -46,7 +46,7 @@ end
 ---Get the full path to the currently installed lunarvim repo
 ---@return string
 local function get_install_path()
-  local lvim_runtime_dir = os.getenv "LUNARVIM_RUNTIME_DIR"
+  local lvim_runtime_dir = os.getenv "LUNARVIM_INSTALL_DIR"
   if not lvim_runtime_dir then
     -- when nvim is used directly
     return vim.fn.stdpath "config"
@@ -124,7 +124,7 @@ end
 ---pulls the latest changes from github and, resets the startup cache
 function M:update()
   hooks.run_pre_update()
-  M:update_repo()
+  --M:update_repo()
   hooks.run_post_update()
 end
 
