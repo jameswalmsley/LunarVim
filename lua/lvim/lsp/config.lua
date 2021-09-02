@@ -51,7 +51,7 @@ return {
       },
     },
     virtual_text = true,
-    update_in_insert = false,
+    update_in_insert = true,
     underline = true,
     severity_sort = true,
     float = {
