@@ -154,6 +154,7 @@ end
 function M:load(config_path)
   local autocmds = require "lvim.core.autocmds"
   pcall(dofile, "/opt/lunarvim/nvim/lv-config.lua")
+  require "distro.config"
   config_path = config_path or self.get_user_config_path()
   local ok, err = pcall(dofile, config_path)
   if not ok then
