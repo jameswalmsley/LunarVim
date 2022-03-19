@@ -1,24 +1,44 @@
-lvim.builtin.dashboard.active = true
-lvim.builtin.nvimtree.side = "right"
-lvim.format_on_save = true
-
+lvim.colorscheme = "catppuccin"
+lvim.builtin.alpha.active = true
+lvim.builtin.lualine.options.globalstatus = true
+lvim.builtin.nvimtree.setup.quit_on_open = true
+lvim.builtin.nvimtree.setup.view.side = "right"
+lvim.format_on_save = false
+lvim.builtin.project.manual_mode = true
 
 lvim.keys.normal_mode["<C-j>"] = ":cnext<CR>"
 lvim.keys.normal_mode["<C-k>"] = ":cprev<CR>"
 
-vim.opt.relativenumber=true
+vim.opt.relativenumber = true
 
 lvim.builtin.lualine.options = {
-    component_separators = { left = "", right = "" },
-    section_separators = { left = "", right = "" },
+  component_separators = { left = "", right = "" },
+  section_separators = { left = "", right = "" },
 }
 lvim.builtin.lualine.sections.lualine_z = {
-  "location"
+  "location",
 }
 
 lvim.builtin.which_key.mappings["o"] = {
   name = "Octo",
   i = {
     c = {},
-  }
+  },
+}
+
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  {
+    exe = "stylua",
+  },
+  {
+    exe = "black",
+  },
+}
+
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  exe = "shellcheck",
+  args = { "--severity", "warning" },
+  filetypes = "sh"
 }
