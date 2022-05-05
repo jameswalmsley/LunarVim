@@ -4,7 +4,6 @@ lvim.builtin.terminal.active = true
 lvim.builtin.terminal.direction = "float"
 lvim.builtin.treesitter.ensure_installed = "all"
 lvim.builtin.lualine.options.globalstatus = true
-lvim.builtin.nvimtree.setup.quit_on_open = true
 lvim.builtin.nvimtree.setup.view.side = "right"
 lvim.format_on_save = false
 lvim.builtin.project.manual_mode = true
