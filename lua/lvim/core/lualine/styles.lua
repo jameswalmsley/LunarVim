@@ -11,6 +11,7 @@ styles.none = {
   style = "none",
   options = {
     theme = "auto",
+    globalstatus = true,
     icons_enabled = lvim.use_icons,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
@@ -40,6 +41,7 @@ styles.default = {
   style = "default",
   options = {
     theme = "auto",
+    globalstatus = true,
     icons_enabled = lvim.use_icons,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
@@ -69,10 +71,11 @@ styles.lvim = {
   style = "lvim",
   options = {
     theme = "auto",
+    globalstatus = true,
     icons_enabled = lvim.use_icons,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
-    disabled_filetypes = { "alpha", "NvimTree", "Outline" },
+    disabled_filetypes = { "alpha" },
   },
   sections = {
     lualine_a = {
@@ -80,7 +83,6 @@ styles.lvim = {
     },
     lualine_b = {
       components.branch,
-      components.filename,
     },
     lualine_c = {
       components.diff,
@@ -88,27 +90,39 @@ styles.lvim = {
     },
     lualine_x = {
       components.diagnostics,
-      components.treesitter,
       components.lsp,
+      components.spaces,
       components.filetype,
     },
-    lualine_y = {},
+    lualine_y = { components.location },
     lualine_z = {
-      components.scrollbar,
+      components.progress,
     },
   },
   inactive_sections = {
     lualine_a = {
-      "filename",
+      components.mode,
     },
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {},
+    lualine_b = {
+      components.branch,
+    },
+    lualine_c = {
+      components.diff,
+      components.python_env,
+    },
+    lualine_x = {
+      components.diagnostics,
+      components.lsp,
+      components.spaces,
+      components.filetype,
+    },
+    lualine_y = { components.location },
+    lualine_z = {
+      components.progress,
+    },
   },
   tabline = {},
-  extensions = { "nvim-tree" },
+  extensions = {},
 }
 
 function M.get_style(style)

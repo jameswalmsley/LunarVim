@@ -10,6 +10,57 @@ function M.load_defaults()
     user_config_file = user_config_file:gsub("\\", "/")
   end
 
+  vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = {
+      "Jaq",
+      "qf",
+      "help",
+      "man",
+      "lspinfo",
+      "spectre_panel",
+      "lir",
+      "DressingSelect",
+      "tsplayground",
+      "Markdown",
+    },
+    callback = function()
+      vim.cmd [[
+      nnoremap <silent> <buffer> q :close<CR>
+      nnoremap <silent> <buffer> <esc> :close<CR>
+      set nobuflisted
+    ]]
+    end,
+  })
+
+  vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = {
+      "alpha",
+    },
+    callback = function()
+      vim.cmd [[
+      nnoremap <silent> <buffer> q :qa<CR>
+      nnoremap <silent> <buffer> <esc> :qa<CR>
+      set nobuflisted
+    ]]
+    end,
+  })
+
+  vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = { "lir" },
+    callback = function()
+      vim.opt_local.number = false
+      vim.opt_local.relativenumber = false
+    end,
+  })
+
+  -- TODO: figure out what keeps overriding laststatus
+  vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+    pattern = { "*" },
+    callback = function()
+      vim.opt.laststatus = 3
+    end,
+  })
+
   local definitions = {
     {
       "TextYankPost",
@@ -18,7 +69,7 @@ function M.load_defaults()
         pattern = "*",
         desc = "Highlight text on yank",
         callback = function()
-          require("vim.highlight").on_yank { higroup = "Search", timeout = 200 }
+          require("vim.highlight").on_yank { higroup = "Search", timeout = 100 }
         end,
       },
     },
@@ -155,19 +206,11 @@ end
 ---@param name string the augroup name
 function M.clear_augroup(name)
   -- defer the function in case the autocommand is still in-use
-  local exists, _ = pcall(vim.api.nvim_get_autocmds, { group = name })
-  if not exists then
-    Log:debug("ignoring request to clear autocmds from non-existent group " .. name)
-    return
-  end
+  Log:debug("request to clear autocmds  " .. name)
   vim.schedule(function()
-    local status_ok, _ = xpcall(function()
+    pcall(function()
       vim.api.nvim_clear_autocmds { group = name }
-    end, debug.traceback)
-    if not status_ok then
-      Log:warn("problems detected while clearing autocmds from " .. name)
-      Log:debug(debug.traceback())
-    end
+    end)
   end)
 end
 

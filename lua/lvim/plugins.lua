@@ -7,20 +7,19 @@ local core_plugins = {
     "jose-elias-alvarez/null-ls.nvim",
   },
   { "antoinemadec/FixCursorHold.nvim" }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
+  { "williamboman/mason-lspconfig.nvim" },
   {
-    "williamboman/nvim-lsp-installer",
+    "williamboman/mason.nvim",
+    config = function()
+      require("lvim.core.mason").setup()
+    end,
   },
   {
-    "lunarvim/onedarker.nvim",
+    "folke/tokyonight.nvim",
     config = function()
-      pcall(function()
-        if lvim and lvim.colorscheme == "onedarker" then
-          require("onedarker").setup()
-          lvim.builtin.lualine.options.theme = "onedarker"
-        end
-      end)
+      require("lvim.core.theme").setup()
     end,
-    disable = lvim.colorscheme ~= "onedarker",
+    -- disable = not vim.startswith(lvim.colorscheme, "tokyonight"),
   },
   {
     "rcarriga/nvim-notify",
@@ -37,6 +36,7 @@ local core_plugins = {
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
     config = function()
       require("lvim.core.telescope").setup()
     end,
@@ -96,8 +96,7 @@ local core_plugins = {
     "hrsh7th/cmp-path",
   },
   {
-    -- NOTE: Temporary fix till folke comes back
-    "max397574/lua-dev.nvim",
+    "folke/lua-dev.nvim",
     module = "lua-dev",
   },
 
@@ -134,7 +133,14 @@ local core_plugins = {
     end,
     disable = not lvim.builtin.nvimtree.active,
   },
-
+  -- Lir
+  {
+    "christianchiarulli/lir.nvim",
+    config = function()
+      require("lvim.core.lir").setup()
+    end,
+    disable = not lvim.builtin.lir.active,
+  },
   {
     "lewis6991/gitsigns.nvim",
 
@@ -147,7 +153,7 @@ local core_plugins = {
 
   -- Whichkey
   {
-    "max397574/which-key.nvim",
+    "folke/which-key.nvim",
     config = function()
       require("lvim.core.which-key").setup()
     end,
@@ -189,6 +195,15 @@ local core_plugins = {
       require("lvim.core.lualine").setup()
     end,
     disable = not lvim.builtin.lualine.active,
+  },
+
+  -- breadcrumbs
+  {
+    "SmiteshP/nvim-navic",
+    config = function()
+      require("lvim.core.breadcrumbs").setup()
+    end,
+    disable = not lvim.builtin.breadcrumbs.active,
   },
 
   {
@@ -243,6 +258,36 @@ local core_plugins = {
   -- SchemaStore
   {
     "b0o/schemastore.nvim",
+  },
+
+  {
+    "RRethy/vim-illuminate",
+    config = function()
+      require("lvim.core.illuminate").setup()
+    end,
+    disable = not lvim.builtin.illuminate.active,
+  },
+
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require("lvim.core.indentlines").setup()
+    end,
+    disable = not lvim.builtin.indentlines.active,
+  },
+
+  {
+    "lunarvim/onedarker.nvim",
+    branch = "freeze",
+    config = function()
+      pcall(function()
+        if lvim and lvim.colorscheme == "onedarker" then
+          require("onedarker").setup()
+          lvim.builtin.lualine.options.theme = "onedarker"
+        end
+      end)
+    end,
+    disable = lvim.colorscheme ~= "onedarker",
   },
 }
 

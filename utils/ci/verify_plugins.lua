@@ -33,8 +33,7 @@ end
 local get_install_path = function(spec)
   local prefix = is_optional(spec) and packer_config.opt_dir or packer_config.start_dir
   local path = join_paths(prefix, get_short_name(spec))
-  assert(is_directory(path))
-  return path
+  return is_directory(path) and path
 end
 
 local function call_proc(process, opts, cb)
@@ -92,11 +91,12 @@ end
 
 local function verify_core_plugins(verbose)
   for _, spec in pairs(core_plugins) do
-    if not spec.disable then
+    local path = get_install_path(spec)
+    if not spec.disable and path then
       table.insert(collection, {
         name = get_short_name(spec),
         commit = get_default_sha1(spec),
-        path = get_install_path(spec),
+        path = path,
       })
     end
   end
@@ -112,7 +112,7 @@ local function verify_core_plugins(verbose)
           io.write(fmt("verified [%s]\n", entry.name))
         end
       end
-      local current_commit = result:gsub("\n", ""):gsub([[']], [[]])
+      local current_commit = result:gsub("\n", ""):gsub([[']], [[]]):sub(1, 7)
       -- just in case there are some extra qutoes or it's a longer commit hash
       if current_commit ~= entry.commit then
         io.write(fmt("mismatch at [%s]: expected [%s], got [%s]\n", entry.name, entry.commit, current_commit))
@@ -120,7 +120,7 @@ local function verify_core_plugins(verbose)
       end
     end
 
-    local handle = call_proc("git", { args = { "log", "--pretty='%h'", "-1" }, cwd = entry.path }, on_done)
+    local handle = call_proc("git", { args = { "rev-parse", "--short", "HEAD" }, cwd = entry.path }, on_done)
     assert(handle)
     table.insert(active_jobs, handle)
   end

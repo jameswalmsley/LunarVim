@@ -1,5 +1,53 @@
 local M = {}
 
+local pickers = {
+  find_files = {
+    theme = "dropdown",
+    hidden = true,
+    previewer = false,
+  },
+  live_grep = {
+    --@usage don't include the filename in the search results
+    only_sort_text = true,
+    theme = "dropdown",
+  },
+  grep_string = {
+    only_sort_text = true,
+    theme = "dropdown",
+  },
+  buffers = {
+    theme = "dropdown",
+    previewer = false,
+    initial_mode = "normal",
+  },
+  planets = {
+    show_pluto = true,
+    show_moon = true,
+  },
+  git_files = {
+    theme = "dropdown",
+    hidden = true,
+    previewer = false,
+    show_untracked = true,
+  },
+  lsp_references = {
+    theme = "dropdown",
+    initial_mode = "normal",
+  },
+  lsp_definitions = {
+    theme = "dropdown",
+    initial_mode = "normal",
+  },
+  lsp_declarations = {
+    theme = "dropdown",
+    initial_mode = "normal",
+  },
+  lsp_implementations = {
+    theme = "dropdown",
+    initial_mode = "normal",
+  },
+}
+
 function M.config()
   -- Define this minimal config so that it's available if telescope is not yet available.
 
@@ -56,30 +104,25 @@ function M.config()
           ["<C-k>"] = actions.cycle_history_prev,
           ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
           ["<CR>"] = actions.select_default,
+          ["<C-d>"] = require("telescope.actions").delete_buffer,
         },
         n = {
           ["<C-n>"] = actions.move_selection_next,
           ["<C-p>"] = actions.move_selection_previous,
           ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+          ["dd"] = require("telescope.actions").delete_buffer,
         },
       },
+      pickers = pickers,
       file_ignore_patterns = {},
-      path_display = { shorten = 5 },
+      path_display = { "smart" },
       winblend = 0,
       border = {},
       borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
       color_devicons = true,
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
     },
-    pickers = {
-      find_files = {
-        hidden = true,
-      },
-      live_grep = {
-        --@usage don't include the filename in the search results
-        only_sort_text = true,
-      },
-    },
+    pickers = pickers,
     extensions = {
       fzf = {
         fuzzy = true, -- false will only do exact matching
@@ -117,6 +160,7 @@ function M.setup()
         ["<C-n>"] = actions.move_selection_next,
         ["<C-p>"] = actions.move_selection_previous,
         ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+        ["dd"] = require("telescope.actions").delete_buffer,
       },
     },
   }, lvim.builtin.telescope)

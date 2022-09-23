@@ -6,8 +6,8 @@ M.config = function()
     on_config_done = nil,
     -- size can be a number or function which is passed the current terminal
     size = 20,
-    -- open_mapping = [[<c-\>]],
-    open_mapping = [[<c-t>]],
+    open_mapping = [[<c-\>]],
+    -- open_mapping = [[<c-t>]],
     hide_numbers = true, -- hide the number column in toggleterm buffers
     shade_filetypes = {},
     shade_terminals = true,
@@ -39,9 +39,9 @@ M.config = function()
     -- { exec, keymap, name}
     -- lvim.builtin.terminal.execs = {{}} to overwrite
     -- lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}
+    -- TODO: pls add mappings in which key and refactor this
     execs = {
       { "lazygit", "<leader>gg", "LazyGit", "float" },
-      { "lazygit", "<c-\\><c-g>", "LazyGit", "float" },
     },
   }
 end
@@ -76,23 +76,9 @@ M.add_exec = function(opts)
     return
   end
 
-  local exec_func = string.format(
-    "<cmd>lua require('lvim.core.terminal')._exec_toggle({ cmd = '%s', count = %d, direction = '%s'})<CR>",
-    opts.cmd,
-    opts.count,
-    opts.direction
-  )
-
-  require("lvim.keymappings").load {
-    normal_mode = { [opts.keymap] = exec_func },
-    term_mode = { [opts.keymap] = exec_func },
-  }
-
-  local wk_status_ok, wk = pcall(require, "which-key")
-  if not wk_status_ok then
-    return
-  end
-  wk.register({ [opts.keymap] = { opts.label } }, { mode = "n" })
+  vim.keymap.set({ "n" }, opts.keymap, function()
+    M._exec_toggle { cmd = opts.cmd, count = opts.count, direction = opts.direction }
+  end, { desc = opts.label, noremap = true, silent = true })
 end
 
 M._exec_toggle = function(opts)

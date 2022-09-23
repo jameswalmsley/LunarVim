@@ -21,3 +21,4 @@ commands.load(commands.defaults)
 
 require("lvim.lsp").setup()
 
+vim.opt.laststatus = 3

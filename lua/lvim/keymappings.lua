@@ -31,12 +31,6 @@ local mode_adapters = {
 
 local defaults = {
   insert_mode = {
-    -- 'jk' for quitting insert mode
-    ["jk"] = "<ESC>",
-    -- 'kj' for quitting insert mode
-    ["kj"] = "<ESC>",
-    -- 'jj' for quitting insert mode
-    ["jj"] = "<ESC>",
     -- Move current line / block with Alt-j/k ala vscode.
     ["<A-j>"] = "<Esc>:m .+1<CR>==gi",
     -- Move current line / block with Alt-j/k ala vscode.
@@ -60,10 +54,6 @@ local defaults = {
     ["<C-Down>"] = ":resize +2<CR>",
     ["<C-Left>"] = ":vertical resize -2<CR>",
     ["<C-Right>"] = ":vertical resize +2<CR>",
-
-    -- Tab switch buffer
-    ["<S-l>"] = ":BufferLineCycleNext<CR>",
-    ["<S-h>"] = ":BufferLineCyclePrev<CR>",
 
     -- Move current line / block with Alt-j/k a la vscode.
     ["<A-j>"] = ":m .+1<CR>==",
