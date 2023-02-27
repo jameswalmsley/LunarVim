@@ -117,6 +117,7 @@ local core_plugins = {
       require("lvim.core.autopairs").setup()
     end,
     enabled = lvim.builtin.autopairs.active,
+    dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp" },
   },
 
   -- Treesitter
@@ -280,11 +281,22 @@ local core_plugins = {
   -- Terminal
   {
     "akinsho/toggleterm.nvim",
-    event = "VeryLazy",
     branch = "main",
+    init = function()
+      require("lvim.core.terminal").init()
+    end,
     config = function()
       require("lvim.core.terminal").setup()
     end,
+    cmd = {
+      "ToggleTerm",
+      "TermExec",
+      "ToggleTermToggleAll",
+      "ToggleTermSendCurrentLine",
+      "ToggleTermSendVisualLines",
+      "ToggleTermSendVisualSelection",
+    },
+    keys = lvim.builtin.terminal.open_mapping,
     enabled = lvim.builtin.terminal.active,
   },
 
