@@ -1,12 +1,12 @@
 {
   "Comment.nvim": {
-    "commit": "6821b3a"
+    "commit": "8d3aa5c"
   },
   "LuaSnip": {
-    "commit": "836d4f5"
+    "commit": "0258869"
   },
   "alpha-nvim": {
-    "commit": "906649c"
+    "commit": "dafa11a"
   },
   "bigfile.nvim": {
     "commit": "c1bad34"
@@ -30,16 +30,16 @@
     "commit": "1809552"
   },
   "friendly-snippets": {
-    "commit": "009887b"
+    "commit": "8d91ba2"
   },
   "gitsigns.nvim": {
-    "commit": "b1f9cf7"
+    "commit": "ca473e2"
   },
   "indent-blankline.nvim": {
     "commit": "018bd04"
   },
   "lazy.nvim": {
-    "commit": "5b4444f"
+    "commit": "57cce98"
   },
   "lir.nvim": {
     "commit": "1aa871f"
@@ -51,49 +51,49 @@
     "commit": "29eedf7"
   },
   "mason-lspconfig.nvim": {
-    "commit": "a31e011"
+    "commit": "b64fded"
   },
   "mason.nvim": {
-    "commit": "b3db699"
+    "commit": "5e059a0"
   },
   "neodev.nvim": {
-    "commit": "50eaabc"
+    "commit": "7330427"
   },
   "nlsp-settings.nvim": {
-    "commit": "1b9fed5"
+    "commit": "23705ee"
   },
   "null-ls.nvim": {
-    "commit": "ccd6cb0"
+    "commit": "0180603"
   },
   "nvim-autopairs": {
     "commit": "e755f36"
   },
   "nvim-cmp": {
-    "commit": "feed47f"
+    "commit": "777450f"
   },
   "nvim-dap": {
-    "commit": "7319607"
+    "commit": "7389e85"
   },
   "nvim-dap-ui": {
     "commit": "bdb94e3"
   },
   "nvim-lspconfig": {
-    "commit": "2ba6e26"
+    "commit": "c345220"
   },
   "nvim-navic": {
-    "commit": "cdd2453"
+    "commit": "59b997f"
   },
   "nvim-tree.lua": {
-    "commit": "bbb6d48"
+    "commit": "6319ad9"
   },
   "nvim-treesitter": {
-    "commit": "fc1ca10"
+    "commit": "c9ef5e5"
   },
   "nvim-ts-context-commentstring": {
     "commit": "729d83e"
   },
   "nvim-web-devicons": {
-    "commit": "4af94fe"
+    "commit": "95b1e30"
   },
   "onedarker.nvim": {
     "commit": "b00dd21"
@@ -108,7 +108,7 @@
     "commit": "1c2e9c9"
   },
   "schemastore.nvim": {
-    "commit": "42e12c5"
+    "commit": "ae41a33"
   },
   "structlog.nvim": {
     "commit": "45b26a2"
@@ -120,15 +120,15 @@
     "commit": "766a45a"
   },
   "toggleterm.nvim": {
-    "commit": "31d38d1"
+    "commit": "ed6c92d"
   },
   "tokyonight.nvim": {
-    "commit": "3ebc29d"
+    "commit": "1b0c880"
   },
   "vim-illuminate": {
-    "commit": "49062ab"
+    "commit": "a290727"
   },
   "which-key.nvim": {
-    "commit": "fb02773"
+    "commit": "87b1459"
   }
 }
